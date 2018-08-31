@@ -1,0 +1,46 @@
+<div class="container">
+  <h3>User Details</h3>
+  <form [formGroup]="refForm" (ngSubmit)="submitForm()" novalidate>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="fname">
+      <div *ngIf="refForm.controls['fname'].hasError('required')" class="alert alert-danger">
+        Fname is Required
+      </div>
+      <div *ngIf="refForm.controls['fname'].hasError('minlength')" class="alert alert-danger">
+        Please enter atleast 4 characters
+      </div>
+      <div *ngIf="refForm.controls['fname'].hasError('maxlength')" class="alert alert-danger">
+        Name can not exceed 10 characters
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Middle Name</label>
+      <input type="text" class="form-control" formControlName="mname">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lname">
+      <div *ngIf="refForm.controls['lname'].hasError('invalidLength')" class="alert alert-danger">
+         Last name should be eithr 5 or 9 characters
+      </div>
+    </div>
+    <div formGroupName="Address">
+      <div class="form-group">
+        <label>City</label>
+        <input type="text" class="form-control" formControlName="city">
+      </div>
+      <div class="form-group">
+        <label>Postal Code</label>
+        <input type="text" class="form-control" formControlName="pincode">
+        <div *ngIf="refForm.controls['Address'].controls['pincode'].hasError('required')" class="alert alert-danger">
+          Pincode is required
+        </div>
+        <div *ngIf="refForm.controls['Address'].controls['pincode'].hasError('pattern')" class="alert alert-danger">
+          Please enter 5 numbers
+        </div>
+      </div>
+    </div>
+    <button  type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
